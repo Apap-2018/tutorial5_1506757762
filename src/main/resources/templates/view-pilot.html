@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<object th:include="fragments/fragment :: head"></object>
+	
+	<body>
+		<nav th:replace="fragments/fragment :: navbar"></nav>
+				<div class="container">
+			<h3 th:text="'Pilot License Number : ' + ${pilot.licenseNumber}"></h3>
+			<h3 th:text="'Name : ' + ${pilot.name}"></h3>
+			<h3 th:text="'Fly Hour : ' +${pilot.flyHour}"></h3>
+			<h3 th:text="${pilot.flyHour} >= 100 ? 'Status : Pilot Senior' : 'Status : Pilot Junior'"></h3>
+	
+
+
+	
+			
+					<br>
+	
+			<form th:action="@{/flight/add/} + ${pilot.id}" th:object="${pilot}" method="POST">
+			<input  type="hidden" th:field="*{id}"></input>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Flight Number</th>
+							<th>Origin</th>
+							<th>Destination</th>
+							<th>Time</th>
+							<th><button type="submit" class="btn" name="addRow">Add row</button></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="car,rowStat : *{pilotFlight}">
+							<td><input type="text" th:field="*{pilotFlight[__${rowStat.index}__].flightNumber}" /></td>
+							<td><input type="text" th:field="*{pilotFlight[__${rowStat.index}__].origin}" /></td>
+							<td><input type="text" th:field="*{pilotFlight[__${rowStat.index}__].destination}" /></td>
+							<td><input type="date" th:field="*{pilotFlight[__${rowStat.index}__].time}" /></td>
+		      				<td><button type="submit" class="btn btn-danger" name="removeRow" th:value="${rowStat.index}">Remove</button></td>
+						</tr>
+					</tbody>
+				</table>
+				<button type="submit" class="btn btn-primary" name="save">submit</button>
+			</form>
+		</div>
+	</body>
+	
+</html>

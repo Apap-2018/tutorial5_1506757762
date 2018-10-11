@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<object th:include="fragments/fragment :: head"></object>
+		
+	<body>
+		<nav th:replace="fragments/fragment :: navbar"></nav>
+		
+		<div class="container-fluid">
+		<h2>Hello!</h2>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						Tambah Pilot
+					</div>
+					<div class="card-body">
+						<p class="card-text">Fitur untuk menambah pilot</p>
+						<a class="btn btn-primary" th:href="@{/pilot/add}">Tambah</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="cl-md-6">
+				<div class="card">
+					<div class="card=herader">
+						Cari Pilot berdasarkan Nomer lisensi
+					</div>
+					<form th:action="@{/pilot/view}" method="GET">
+						<label for="licenseNumber">Nomor lisensi:</label>
+						<input type="text" name="licenseNumber" class="form-control" />
+						<p></p>
+						<button type="submit" class="btn btn-primary">Cari</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		</div>
+		
+	</body>
+</html>
